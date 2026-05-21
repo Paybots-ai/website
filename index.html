@@ -6,474 +6,222 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <title>PayBots — The Payment Layer for AI Agents</title>
-    <meta name="description" content="PayBots builds the consumer payment layer for AI agents. Giving users granular control over how AI spends their money.">
+    <title>Paybots | Agentic payments, backed.</title>
+    <meta name="description" content="Paybots is the payments platform for AI agents. Every purchase is checked against what your user actually asked for, and we stand behind the ones we approve.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #FAFAFA;
-            --bg-white: #FFFFFF;
-            --text-primary: #111111;
-            --text-secondary: #555555;
-            --text-muted: #888888;
-            --accent: #6366F1;
-            --accent-light: #EEF2FF;
-            --accent-dark: #4F46E5;
-            --border: #E5E5E5;
-            --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'DM Sans', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* NAV */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(250,250,250,0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-        .nav-inner {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 16px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: 22px;
-            color: var(--text-primary);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-        .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--text-primary); }
-
-        /* HERO */
-        .hero {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 160px 32px 100px;
-            text-align: center;
-        }
-        .hero-eyebrow {
-            display: inline-block;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 24px;
-        }
-        .hero h1 {
-            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
-            font-size: clamp(40px, 6vw, 64px);
-            font-weight: 700;
-            line-height: 1.15;
-            color: var(--text-primary);
-            margin-bottom: 28px;
-            letter-spacing: -1px;
-        }
-        .hero p {
-            font-size: 19px;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-        .hero-cta {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 14px 36px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background 0.2s, transform 0.15s;
-        }
-        .hero-cta:hover { background: var(--accent-dark); transform: translateY(-1px); }
-
-        /* DIVIDER */
-        .divider {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-        .divider hr {
-            border: none;
-            border-top: 1px solid var(--border);
-        }
-
-        /* FEATURES */
-        .features {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 80px 32px;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-        .feature-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 36px 28px;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .feature-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        }
-        .feature-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--accent-light);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-        .feature-card h3 {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-        .feature-card p {
-            font-size: 15px;
-            line-height: 1.65;
-            color: var(--text-secondary);
-        }
-
-        /* B2B SECTION */
-        .b2b-section {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 0 32px 80px;
-        }
-        .b2b-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-        .b2b-header h2 {
-            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        .b2b-header p {
-            font-size: 17px;
-            color: var(--text-secondary);
-            max-width: 560px;
-            margin: 0 auto;
-        }
-
-        /* CAREERS */
-        .careers {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 80px 32px;
-        }
-        .careers-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-        .careers-header h2 {
-            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        .careers-header p {
-            font-size: 17px;
-            color: var(--text-secondary);
-            max-width: 520px;
-            margin: 0 auto;
-        }
-        .careers-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-        .career-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 36px 32px;
-            box-shadow: var(--card-shadow);
-        }
-        .career-card h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-        .career-card p {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
-        .career-tag {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--accent);
-            background: var(--accent-light);
-            padding: 4px 12px;
-            border-radius: 100px;
-        }
-        .careers-bottom {
-            text-align: center;
-        }
-        .careers-bottom p {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-        .careers-bottom a {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 14px 36px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background 0.2s, transform 0.15s;
-        }
-        .careers-bottom a:hover { background: var(--accent-dark); transform: translateY(-1px); }
-
-        /* CONTACT */
-        .contact {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 0 32px 100px;
-        }
-        .contact-inner {
-            background: var(--bg-white);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 60px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: var(--card-shadow);
-        }
-        .contact-inner h2 {
-            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        .contact-inner > p {
-            font-size: 15px;
-            color: var(--text-secondary);
-            text-align: center;
-            margin-bottom: 32px;
-        }
-        .contact-mailto {
-            display: block;
-            width: 100%;
-            background: var(--accent);
-            color: white;
-            padding: 14px;
-            border-radius: 8px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            text-align: center;
-            transition: background 0.2s, transform 0.15s;
-        }
-        .contact-mailto:hover { background: var(--accent-dark); transform: translateY(-1px); }
-
-        /* FOOTER */
-        footer {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 24px 32px 40px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        footer p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-        footer a {
-            font-size: 13px;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        footer a:hover { color: var(--text-primary); }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .nav-inner { padding: 14px 20px; }
-            .hero { padding: 130px 20px 70px; }
-            .hero p { font-size: 17px; }
-            .features { padding: 60px 20px; }
-            .features-grid { grid-template-columns: 1fr; gap: 16px; }
-            .b2b-section { padding: 0 20px 60px; }
-            .careers { padding: 60px 20px; }
-            .careers-grid { grid-template-columns: 1fr; }
-            .contact { padding: 0 20px 70px; }
-            .contact-inner { padding: 36px 24px; }
-            footer { padding: 24px 20px 32px; flex-direction: column; gap: 8px; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
-    <nav>
+    <nav id="nav">
         <div class="nav-inner">
-            <a href="#" class="logo">Pay<span>Bots</span></a>
-            <div class="nav-links">
-                <a href="#business">Business</a>
-                <a href="#careers">Careers</a>
-                <a href="#contact">Contact</a>
-            </div>
+            <a href="/" class="logo">Pay<span>bots</span></a>
+            <a href="mailto:hello@paybots.io?subject=Paybots%20Inquiry" class="btn btn-primary btn-nav">Talk to us</a>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-eyebrow">Payment infrastructure for the AI agent economy</div>
-        <h1>The trust layer between AI agents and your money.</h1>
-        <p>AI is learning to shop, book, and buy on your behalf. PayBots gives you granular control over how AI can spend your money, so you never have to choose between convenience and safety.</p>
-        <a href="#contact" class="hero-cta">Get in touch</a>
-    </section>
-
-    <div class="divider"><hr></div>
-
-    <section class="features">
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>Category Controls</h3>
-                <p>Set spending limits by category. Let your AI book travel but not buy electronics. You decide what's in scope.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Spending Caps</h3>
-                <p>Define per-transaction and daily limits. Your AI operates within the boundaries you set, with no surprises.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Real-Time Monitoring</h3>
-                <p>See every transaction as it happens. Full visibility into what your AI is spending and where.</p>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"><hr></div>
-
-    <section class="b2b-section" id="business">
-        <div class="b2b-header">
-            <h2>Tools for businesses and developers.</h2>
-            <p>PayBots isn't just for consumers. It's the payment infrastructure layer that companies building AI agents plug into.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Programmable Virtual Cards</h3>
-                <p>Issue scoped virtual cards for your AI agents on the fly. Set merchant restrictions, spending limits, and expiration rules per card, per agent, per task.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔌</div>
-                <h3>Agent-Ready APIs</h3>
-                <p>Give your AI agents the ability to transact with a simple API integration. Built to work with MCP, agent frameworks, and the tools developers already use.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
-                <h3>Policy and Compliance</h3>
-                <p>Define spending policies at the organization level. Full audit trails, real-time controls, and the accountability layer that makes autonomous spending safe at scale.</p>
+    <section class="hero-dark">
+        <div class="hero-dark-inner">
+            <div class="hero-dark-grid">
+                <div class="hero-dark-copy">
+                    <div class="agent-pill">
+                        <span class="agent-pill-dot"></span>
+                        Agents at work
+                    </div>
+                    <h1>Trust AI to spend money the way you want</h1>
+                    <p>AI shops, reserves, and buys on your behalf. Paybots checks every charge against the user's rules and intent, and stands behind what we approve.</p>
+                    <div class="hero-ctas">
+                        <a href="mailto:hello@paybots.io?subject=Paybots%20Inquiry" class="btn btn-primary">Talk to us</a>
+                    </div>
+                </div>
+                <div class="agent-console surface" aria-hidden="true">
+                    <div class="agent-console-header">
+                        <span class="console-dot"></span>
+                        <span class="console-dot"></span>
+                        <span class="console-dot"></span>
+                        paybots / mandate check
+                    </div>
+                    <div class="agent-console-body">
+                        <div class="agent-flow">
+                            <div class="agent-flow-step">
+                                <span class="label">Mandate</span>
+                                <span class="detail">Flight under $400</span>
+                            </div>
+                            <div class="agent-flow-step">
+                                <span class="label">Purchase</span>
+                                <span class="detail">$387 · United</span>
+                                <span class="status status-approved">aligned</span>
+                            </div>
+                            <div class="agent-flow-step">
+                                <span class="label">Result</span>
+                                <span class="detail">Cleared · backed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <div class="divider"><hr></div>
-
-    <section class="careers" id="careers">
-        <div class="careers-header">
-            <h2>Join the founding team.</h2>
-            <p>We're hiring the people who will build PayBots from scratch. Competitive salary, full benefits, meaningful equity potential.</p>
+    <section class="section section--bg-default section--tight-top" id="platform">
+        <div class="section-intro centered">
+            <h2>One platform for agent purchases.<br>Three guarantees that&nbsp;hold.</h2>
+            <p>Every charge runs through mandate alignment, user rules, and a transaction guarantee before it hits your books.</p>
         </div>
-        <div class="careers-grid">
-            <div class="career-card">
-                <h3>Founding Operator</h3>
-                <p>Own customer discovery, product decisions, and early team building. This is a founder-level role with real autonomy and a path to an executive position.</p>
-                <span class="career-tag">Full-time</span>
-            </div>
-            <div class="career-card">
-                <h3>Founding Technical Lead</h3>
-                <p>Own architecture decisions, build the core product, and shape the technical direction from day one. You'll work directly with the founding team.</p>
-                <span class="career-tag">Full-time</span>
-            </div>
-        </div>
-        <div class="careers-bottom">
-            <p>If you build things, figure things out, and love going from zero to one, we want to talk to you.</p>
-            <a href="mailto:careers@paybots.io">Apply now</a>
+        <div class="feature-rows">
+            <article class="feature-row surface">
+                <div class="feature-row-copy">
+                    <p class="feature-row-tag">Mandate alignment</p>
+                    <h3>Every purchase checked against what the user actually asked for</h3>
+                    <p>If the agent buys off-script, it doesn't clear. Ambiguous intent gets a one-tap confirmation, not a surprise charge.</p>
+                </div>
+                <div class="feature-row-visual">
+                    <div class="mini-ui">
+                        <div class="mini-ui-line">
+                            <span>User asked</span>
+                            <span>Flight &lt; $400</span>
+                        </div>
+                        <div class="mini-ui-line">
+                            <span>Agent proposed</span>
+                            <span>$387 · United</span>
+                        </div>
+                        <div class="mini-ui-line">
+                            <span>Alignment</span>
+                            <span class="ok">match</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="feature-row surface">
+                <div class="feature-row-copy">
+                    <p class="feature-row-tag">Rules you set</p>
+                    <h3>Caps, categories, and thresholds the agent can't ignore</h3>
+                    <p>Configure once. Your agent operates inside merchant categories, spend limits, and approval thresholds you define.</p>
+                </div>
+                <div class="feature-row-visual">
+                    <div class="mini-ui">
+                        <div class="mini-ui-line">
+                            <span>Daily cap</span>
+                            <span>$500</span>
+                        </div>
+                        <div class="mini-ui-line">
+                            <span>Category</span>
+                            <span>Travel only</span>
+                        </div>
+                        <div class="mini-ui-line">
+                            <span>&gt; $200</span>
+                            <span class="pending">confirm</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="feature-row surface">
+                <div class="feature-row-copy">
+                    <p class="feature-row-tag">Backed transactions</p>
+                    <h3>When it clears Paybots, we stand behind it</h3>
+                    <p>Wrong merchant, prompt injection, off-task purchase: that risk doesn't fall on you or your user.</p>
+                </div>
+                <div class="feature-row-visual">
+                    <div class="mini-ui">
+                        <div class="mini-ui-line">
+                            <span>Status</span>
+                            <span class="ok">backed</span>
+                        </div>
+                        <div class="mini-ui-line">
+                            <span>Mandate</span>
+                            <span>on file</span>
+                        </div>
+                        <div class="mini-ui-line">
+                            <span>Dispute pack</span>
+                            <span class="ok">ready</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
         </div>
     </section>
 
-    <div class="divider"><hr></div>
+    <section class="section section--bg-warm" id="business">
+        <div class="section-intro centered">
+            <p class="section-eyebrow">For builders</p>
+            <h2 class="headline-two-line">
+                <span class="headline-line">Ship agent-driven payments</span>
+                <span class="headline-line">without becoming a payments company</span>
+            </h2>
+            <p>Cobble together tokens, mandates, identity, and dispute infrastructure, or hand users a card and hope. Paybots is the third option: one API, every primitive handled.</p>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-card bento-card--wide surface">
+                <h3>One API, every primitive handled</h3>
+                <p>Tokenization, authorization rules, identity, mandates, dispute records. Works with MCP, agent frameworks, and the surfaces your users already live in.</p>
+            </div>
+            <div class="bento-card surface">
+                <h3>Purchases that clear Paybots are backed by Paybots</h3>
+                <p>Your user doesn't have to take a leap of faith. Agent makes the wrong call, you don't eat it.</p>
+            </div>
+            <div class="bento-card surface">
+                <h3>Dispute-ready by design</h3>
+                <p>Every transaction ships with the mandate, the rules, and the alignment check that approved it. If a charge is contested, the file is already built.</p>
+            </div>
+        </div>
+    </section>
 
-    <section class="contact" id="contact">
-        <div class="contact-inner">
-            <h2>Get in touch</h2>
-            <p>Interested in PayBots? We'd love to hear from you.</p>
-            <a href="mailto:garrett@paybots.io?subject=PayBots%20Inquiry" class="contact-mailto">Send us an email</a>
+    <section class="section section--bg-deep" id="adoption">
+        <div class="section-intro centered">
+            <h2>From controlled to autonomous</h2>
+            <p>Approve first, set rules, then let the agent run on purchases Paybots checks and backs.</p>
+        </div>
+        <div class="adoption-terminal surface" id="adoption-terminal" aria-live="polite">
+            <div class="agent-console-header">
+                <span class="console-dot"></span>
+                <span class="console-dot"></span>
+                <span class="console-dot"></span>
+                paybots / adoption
+            </div>
+            <div class="adoption-terminal-body">
+                <div class="terminal-output" id="terminal-output"></div>
+                <span class="terminal-cursor" id="terminal-cursor" aria-hidden="true">▋</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-band" id="contact">
+        <div class="cta-band-inner">
+            <h2>Trust AI to spend money the way you want</h2>
+            <p class="contact-line"><strong>Building an agent that handles money, or selling through one?</strong> We're working with a small group of early partners. <a href="mailto:hello@paybots.io?subject=Paybots%20Inquiry">hello@paybots.io</a></p>
+            <div class="cta-band-actions">
+                <a href="mailto:hello@paybots.io?subject=Paybots%20Inquiry" class="btn btn-primary">Talk to us</a>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 PayBots</p>
-        <a href="mailto:hello@paybots.io">hello@paybots.io</a>
+        <div class="footer-inner">
+            <div class="footer-careers">
+                <p><strong>Careers.</strong> We're a small team building the payments platform for agentic commerce. If that's something you want to work on, <a href="mailto:hello@paybots.io?subject=Paybots%20Careers">hello@paybots.io</a>.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Paybots, Inc.</p>
+                <div class="footer-links">
+                    <a href="mailto:hello@paybots.io">hello@paybots.io</a>
+                    <a href="/privacy/">Privacy</a>
+                    <a href="/terms/">Terms</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
+    <script src="/nav.js"></script>
+    <script src="/adoption-terminal.js"></script>
     <script>
-        // Smooth scroll for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const href = this.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
