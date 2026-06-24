@@ -1,0 +1,102 @@
+<!-- @dsCard group="Variants" viewport="700x300" name="Decision scale — tweakable" subtitle="Reshape the approve / reject feel: mood, softness, treatment" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="../styles.css"/>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="./tweaks-panel.jsx"></script>
+<style>
+  body { margin:0; font-family:var(--pb-font-sans); background:var(--pb-surface); color:var(--pb-text); padding:24px; }
+  .cap { font-size:var(--pb-text-sm); color:var(--pb-text-muted); margin-bottom:16px; }
+  .cap b { color:var(--pb-text); font-weight:600; }
+  .tiles { display:flex; gap:14px; margin-bottom:16px; }
+  .tile { flex:1; border-radius:var(--pb-radius); padding:18px 20px; display:flex; flex-direction:column; gap:4px; }
+  .tile .lab { font-size:18px; font-weight:600; display:flex; align-items:center; gap:9px; }
+  .tile .sub { font-size:12.5px; opacity:.85; }
+  .dot { width:10px; height:10px; border-radius:50%; flex:none; }
+  .row { display:flex; gap:10px; align-items:center; }
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:var(--pb-radius-pill); font-size:var(--pb-text-xs); font-weight:600; }
+  .hex { font-family:var(--pb-font-mono); font-size:11px; color:var(--pb-text-faint); margin-left:auto; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useTweaks, TweaksPanel, TweakSection, TweakSlider, TweakRadio, TweakSelect } = window;
+
+const MOODS = {
+  "Soft":         { approve: "#2f9e63", reject: "#d2645e", note: "gentle, reassuring" },
+  "Vivid":        { approve: "#188038", reject: "#c5221f", note: "high-signal, Material" },
+  "Deep":         { approve: "#1e7a44", reject: "#b3261e", note: "serious, underwriter-grade" },
+  "Editorial":    { approve: "#4b7d5b", reject: "#b5523f", note: "muted, magazine-calm" },
+  "Blue approve": { approve: "#1a73e8", reject: "#c5221f", note: "colorblind-safe, on-brand" },
+};
+
+/* ---- color helpers ---- */
+const hexToRgb = (h) => { h = h.replace("#", ""); return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)]; };
+const toHex = (r,g,b) => "#" + [r,g,b].map((x)=>Math.max(0,Math.min(255,Math.round(x))).toString(16).padStart(2,"0")).join("");
+function rgbToHsl([r,g,b]){ r/=255;g/=255;b/=255; const mx=Math.max(r,g,b),mn=Math.min(r,g,b); let h,s,l=(mx+mn)/2; if(mx===mn){h=s=0;} else { const d=mx-mn; s=l>0.5?d/(2-mx-mn):d/(mx+mn); h=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4; h/=6; } return [h,s,l]; }
+function hslToHex(h,s,l){ const f=(p,q,t)=>{ if(t<0)t+=1; if(t>1)t-=1; if(t<1/6)return p+(q-p)*6*t; if(t<1/2)return q; if(t<2/3)return p+(q-p)*(2/3-t)*6; return p; }; let r,g,b; if(s===0){r=g=b=l;} else { const q=l<0.5?l*(1+s):l+s-l*s; const p=2*l-q; r=f(p,q,h+1/3); g=f(p,q,h); b=f(p,q,h-1/3); } return toHex(r*255,g*255,b*255); }
+const soften = (hex,amt) => { const [h,s,l]=rgbToHsl(hexToRgb(hex)); return hslToHex(h, s*(1-amt*0.55), Math.min(0.86, l+amt*0.18)); };
+const tint   = (hex) => { const [h,s]=rgbToHsl(hexToRgb(hex)); return hslToHex(h, Math.min(s,0.55), 0.93); };
+const inkOf  = (hex) => { const [h,s,l]=rgbToHsl(hexToRgb(hex)); return hslToHex(h, s, Math.min(l,0.34)); };
+
+function styleFor(color, treatment) {
+  if (treatment === "Solid")   return { background: color, color: "#fff", border: "1px solid " + color, dot: "#fff" };
+  if (treatment === "Outline") return { background: "transparent", color: color, border: "1.5px solid " + color, dot: color };
+  return { background: tint(color), color: inkOf(color), border: "1px solid " + color, dot: color }; // Soft tint — thin colored outline
+}
+
+const DEFAULTS = /*EDITMODE-BEGIN*/{
+  "mood": "Vivid",
+  "softness": 0,
+  "treatment": "Soft tint"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(DEFAULTS);
+  const base = MOODS[t.mood] || MOODS.Soft;
+  const amt = (t.softness || 0) / 100;
+  const approve = soften(base.approve, amt);
+  const reject = soften(base.reject, amt);
+  const treatment = t.treatment === "Solid tint" ? "Solid" : t.treatment; // guard
+  const aS = styleFor(approve, treatment);
+  const dS = styleFor(reject, treatment);
+
+  const tile = (s, label, sub) => (
+    <div className="tile" style={{ background: s.background, color: s.color, border: s.border }}>
+      <span className="lab"><span className="dot" style={{ background: s.dot }} />{label}</span>
+      <span className="sub">{sub}</span>
+    </div>
+  );
+
+  return (
+    <div>
+      <div className="cap"><b>{t.mood}</b> · {base.note} · softness {t.softness}%</div>
+      <div className="tiles">
+        {tile(aS, "Approved", "Seal issued — purchase covered")}
+        {tile(dS, "Rejected", "Blocked before charge — no seal")}
+      </div>
+      <div className="row">
+        <span className="pill" style={{ background: aS.background, color: aS.color, border: aS.border }}><span className="dot" style={{ width:7, height:7, background: aS.dot }} />Approved</span>
+        <span className="pill" style={{ background: dS.background, color: dS.color, border: dS.border }}><span className="dot" style={{ width:7, height:7, background: dS.dot }} />Rejected</span>
+        <span className="hex">{approve} / {reject}</span>
+      </div>
+
+      <TweaksPanel>
+        <TweakSection label="Decision scale" />
+        <TweakSelect label="Mood" value={t.mood} options={Object.keys(MOODS)} onChange={(v) => setTweak("mood", v)} />
+        <TweakSlider label="Softness" value={t.softness} min={0} max={100} step={5} unit="%" onChange={(v) => setTweak("softness", v)} />
+        <TweakRadio label="Treatment" value={t.treatment} options={["Solid", "Soft tint", "Outline"]} onChange={(v) => setTweak("treatment", v)} />
+      </TweaksPanel>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>

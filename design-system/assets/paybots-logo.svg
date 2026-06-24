@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 48" width="196" height="48" role="img" aria-label="Paybots">
+  <text x="0" y="34" font-family="'DM Sans', system-ui, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="-0.4px" fill="#1A1A1F">Pa</text>
+
+  <path d="M41 29 l4.5 7 l8 -20" fill="none" stroke="#4F46E5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+  <text x="55" y="34" font-family="'DM Sans', system-ui, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="-0.4px" fill="#4F46E5">bots</text>
+</svg>

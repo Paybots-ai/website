@@ -1,0 +1,63 @@
+/* Paybots color tokens — the real brand (paybots.io).
+   Warm-paper canvas, white surfaces, an indigo accent, a warm-neutral ink ramp,
+   and the agent decision scale (approve green / reject red; amber = working).
+   Reference the semantic aliases in product code, not the raw hexes. */
+
+:root {
+  /* ── Brand / accent (indigo) ────────────────────────────── */
+  --pb-brand-deep: #4338CA;      /* deepest brand indigo (accent-dark) */
+  --pb-blue: #4F46E5;            /* primary action — accessible indigo (white text ≥ 4.5:1) */
+  --pb-blue-hover: #4338CA;
+  --pb-blue-pressed: #3A2FB0;
+  --pb-blue-link: #4338CA;       /* links read in the darker indigo (≈ 7:1) */
+  --pb-blue-soft: #EEEBFF;       /* tinted chip / selected surface (accent-light) */
+
+  /* ── Neutral ink ramp (warm) ────────────────────────────── */
+  --pb-ink: #1A1A1F;             /* primary text */
+  --pb-ink-2: #5C5C66;           /* secondary text, labels */
+  --pb-ink-faint: #6E6E78;       /* tertiary text — darkened to pass 4.5:1 on white */
+
+  /* ── Surfaces & lines ───────────────────────────────────── */
+  --pb-page: #F5F3EF;            /* the single page ground — warm paper, every surface */
+  --pb-surface: #ffffff;         /* cards, app bar, panels */
+  --pb-surface-muted: #F0EEE9;   /* row hover, inset wells, table head */
+  --pb-surface-hover: #EBE9E4;   /* neutral button rest / hover */
+  --pb-border: #E4E0D8;          /* default hairline (border-on-surface) */
+  --pb-border-strong: #D7D2C8;   /* emphasized control border */
+
+  /* ── Semantic / decision scale (agent palette, tuned for contrast) ── */
+  --pb-green: #157038;           /* APPROVE — text on --pb-green-bg ≈ 4.6:1 (AA) & white-on-fill */
+  --pb-green-bg: #E7F5EC;
+  --pb-green-border: #B7E4C7;
+
+  --pb-amber: #A14908;           /* system status only (working/pending) — NOT a decision. Text on --pb-amber-bg ≈ 4.6:1 (AA) */
+  --pb-amber-bg: #FBF1E1;
+  --pb-amber-border: #F5D9A8;
+
+  --pb-red: #B91C1C;             /* REJECT — passes as text on tint & white-on-fill */
+  --pb-red-bg: #FBEAEA;
+  --pb-red-border: #F3C2C2;
+
+  /* ── Semantic aliases (use these in product code) ───────── */
+  --pb-text: var(--pb-ink);
+  --pb-text-muted: var(--pb-ink-2);
+  --pb-text-faint: var(--pb-ink-faint);
+
+  --pb-bg: var(--pb-page);
+  --pb-surface-card: var(--pb-surface);
+  --pb-surface-inset: var(--pb-surface-muted);
+
+  --pb-primary: var(--pb-blue);
+  --pb-primary-hover: var(--pb-blue-hover);
+  --pb-primary-pressed: var(--pb-blue-pressed);
+  --pb-link: var(--pb-blue-link);
+  --pb-accent-soft: var(--pb-blue-soft);
+
+  --pb-decision-approve: var(--pb-green);
+  --pb-decision-approve-bg: var(--pb-green-bg);
+  --pb-decision-reject: var(--pb-red);
+  --pb-decision-reject-bg: var(--pb-red-bg);
+  --pb-status-working: var(--pb-amber);  /* non-decision: in-progress only */
+
+  --pb-focus-ring: var(--pb-blue);
+}

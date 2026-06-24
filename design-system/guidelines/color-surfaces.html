@@ -1,0 +1,24 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Surfaces & states" subtitle="White base, muted wells, selected tint" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../styles.css"/>
+<style>
+  body { margin:0; font-family:var(--pb-font-sans); background:var(--pb-surface-muted); color:var(--pb-text); padding:20px 24px; }
+  .row { display:flex; gap:14px; }
+  .sw { flex:1; }
+  .chip { height:60px; border-radius:var(--pb-radius-sm); border:1px solid var(--pb-border); }
+  .name { font-size:var(--pb-text-xs); font-weight:var(--pb-weight-medium); margin-top:8px; }
+  .hex { font-family:var(--pb-font-mono); font-size:11px; color:var(--pb-text-muted); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--pb-surface)"></div><div class="name">Surface</div><div class="hex">#FFFFFF</div></div>
+    <div class="sw"><div class="chip" style="background:var(--pb-surface-muted)"></div><div class="name">Muted / well</div><div class="hex">#F0EEE9</div></div>
+    <div class="sw"><div class="chip" style="background:var(--pb-surface-hover)"></div><div class="name">Neutral hover</div><div class="hex">#EBE9E4</div></div>
+    <div class="sw"><div class="chip" style="background:var(--pb-blue-soft);border-color:var(--pb-blue)"></div><div class="name">Selected tint</div><div class="hex">#EEEBFF</div></div>
+  </div>
+</body>
+</html>

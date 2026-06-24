@@ -1,0 +1,77 @@
+<!-- @dsCard group="Dashboard" viewport="1024x720" name="Paybots audit dashboard" subtitle="Underwriting ledger + decision detail" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Underwriting ledger · Paybots</title>
+<link rel="stylesheet" href="../../styles.css"/>
+<link rel="icon" href="../../assets/paybots-mark.svg"/>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin:0; background:var(--pb-bg); color:var(--pb-text); font-family:var(--pb-font-sans); -webkit-font-smoothing:antialiased; }
+  #root { display:flex; flex-direction:column; min-height:100vh; }
+  main { flex:1 0 auto; width:100%; max-width:var(--pb-page-max); margin:0 auto; padding:28px 24px 64px; box-sizing:border-box; }
+  footer { max-width:var(--pb-page-max); margin:0 auto; padding:16px 24px 28px; border-top:1px solid var(--pb-border); color:var(--pb-ink-2); font-size:13px; display:flex; justify-content:space-between; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="./data.js"></script>
+<script src="./theme.js"></script>
+<script src="./analytics-data.js"></script>
+<script src="./disputes-rules-data.js"></script>
+<script src="./settings-data.js"></script>
+<script src="./audit-data.js"></script>
+<script type="text/babel" src="./AppBar.jsx"></script>
+<script type="text/babel" src="./Ledger.jsx"></script>
+<script type="text/babel" src="./DecisionDetail.jsx"></script>
+<script type="text/babel" src="./Analytics.jsx"></script>
+<script type="text/babel" src="./Disputes.jsx"></script>
+<script type="text/babel" src="./Rules.jsx"></script>
+<script type="text/babel" src="./AuditLog.jsx"></script>
+<script type="text/babel" src="./DemoControls.jsx"></script>
+<script type="text/babel">
+  function App() {
+    const [page, setPage] = React.useState("ledger");
+    const [business, setBusiness] = React.useState("");
+    const [openId, setOpenId] = React.useState(null);
+    const data = window.PB_DATA;
+    const open = (id) => { setOpenId(id); setPage("detail"); };
+    const rec = data.records.find((r) => r.id === openId);
+
+    return (
+      <React.Fragment>
+        <AppBar
+          page={page}
+          onNav={(p) => { setPage(["analytics", "disputes", "rules", "audit", "demo"].includes(p) ? p : "ledger"); setOpenId(null); }}
+          business={business}
+          businesses={data.businesses}
+          onBusiness={(v) => { setBusiness(v); setPage("ledger"); }}
+        />
+        <main>
+          {page === "detail" && rec
+            ? <DecisionDetail r={rec} onBack={() => { setPage("ledger"); setOpenId(null); }} />
+            : page === "analytics"
+              ? <Analytics />
+              : page === "disputes"
+                ? <Disputes />
+                : page === "rules"
+                  ? <Rules />
+                  : page === "audit"
+                    ? <AuditLog />
+                    : page === "demo"
+                      ? <DemoControls />
+                      : <Ledger records={data.records} business={business} onOpen={open} />}
+        </main>
+        <footer><span>v0 demo</span><span>Paybots observes the ledger; it never gates a purchase.</span></footer>
+      </React.Fragment>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
