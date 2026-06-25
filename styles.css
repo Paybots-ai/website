@@ -1,6 +1,5 @@
-/* Design-system tokens (source of truth) — the live site now consumes these.
-   Tokens live in design-system/tokens/. The local --* vars below alias the
-   tokens, so the whole stylesheet re-points from one place. */
+/* Design-system tokens — served from ../paybots-design-system (symlinked at /design-system/).
+   The local --* vars below alias the tokens, so the whole stylesheet re-points from one place. */
 @import url("/design-system/tokens/colors.css");
 @import url("/design-system/tokens/typography.css");
 @import url("/design-system/tokens/spacing.css");
