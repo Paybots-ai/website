@@ -1,0 +1,27 @@
+<!-- @dsCard group="Brand" viewport="700x150" name="Status atoms" subtitle="Decision dots & backend status — the recurring signal" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="../styles.css"/>
+<style>
+  body { margin:0; font-family:var(--pb-font-sans); background:var(--pb-surface); color:var(--pb-text); padding:24px; display:flex; gap:40px; align-items:center; }
+  .item { display:flex; align-items:center; gap:9px; font-size:var(--pb-text-sm); color:var(--pb-text-muted); }
+  .dot { width:9px; height:9px; border-radius:50%; flex:none; }
+  .pulse { animation:pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .grp { display:flex; flex-direction:column; gap:12px; }
+</style>
+</head>
+<body>
+  <div class="grp">
+    <div class="item"><span class="dot" style="background:var(--pb-green)"></span>Approved</div>
+    <div class="item"><span class="dot" style="background:var(--pb-red)"></span>Rejected</div>
+  </div>
+  <div class="grp">
+    <div class="item"><span class="dot" style="background:var(--pb-green)"></span>Backend online</div>
+    <div class="item"><span class="dot pulse" style="background:var(--pb-amber)"></span>Working…</div>
+    <div class="item"><span class="dot" style="background:var(--pb-ink-faint)"></span>Backend offline</div>
+  </div>
+</body>
+</html>

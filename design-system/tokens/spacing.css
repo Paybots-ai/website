@@ -1,0 +1,50 @@
+/* Paybots spacing, radius, shadow & motion tokens.
+   Spacing is a 4px base scale. Radius tops out at 12px (cards) — generous but
+   never pill-soft except true pills/chips. Shadows are Material elevation,
+   used sparingly: flat hairline borders are the default container treatment,
+   shadows only for things that float (toasts, menus, dialogs). */
+
+:root {
+  /* Spacing — 4px base */
+  --pb-space-1: 4px;
+  --pb-space-2: 8px;
+  --pb-space-3: 12px;
+  --pb-space-4: 16px;
+  --pb-space-5: 24px;
+  --pb-space-6: 32px;
+  --pb-space-7: 48px;
+  --pb-space-8: 64px;
+
+  /* Semantic spacing rhythm */
+  --pb-gap-inline: var(--pb-space-2);
+  --pb-gap-stack: var(--pb-space-3);
+  --pb-gap-block: var(--pb-space-4);
+  --pb-gap-section: var(--pb-space-5);
+
+  /* Page gutter */
+  --pb-page-gutter: var(--pb-space-5);
+  --pb-page-max: 1024px;
+
+  /* Radius — one card value (12px). Small controls 8px; pills fully round. */
+  --pb-radius-sm: 8px;     /* inputs, small buttons, chips-as-box */
+  --pb-radius: 12px;       /* cards, panels, all surfaces */
+  --pb-radius-pill: 9999px;/* status pills, filter chips, primary buttons */
+
+  /* Elevation — exactly TWO levels. The default container is FLAT (1px border,
+     no shadow). Use --pb-elevate-float only for things that genuinely float
+     above the page: toasts, menus, dialogs. Soft, warm-neutral shadows match
+     the live brand. (--pb-shadow / --pb-shadow-sm retained as back-compat aliases.) */
+  --pb-shadow-sm: 0 1px 2px rgba(26, 26, 31, 0.05), 0 1px 1px rgba(26, 26, 31, 0.04);
+  --pb-shadow: 0 2px 16px rgba(26, 26, 31, 0.06), 0 1px 3px rgba(26, 26, 31, 0.04);
+  --pb-elevate-flat: none; /* @kind shadow */
+  --pb-elevate-float: 0 8px 28px rgba(26, 26, 31, 0.10), 0 1px 3px rgba(26, 26, 31, 0.06);
+
+  /* Focus ring — 2px, applied uniformly to every interactive control. */
+  --pb-shadow-focus: 0 0 0 2px var(--pb-blue);
+  --pb-ring: 0 0 0 2px var(--pb-blue);
+
+  /* Motion — short, eased, no bounce. The product stays quiet and snappy. */
+  --pb-ease: cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+  --pb-dur-fast: 0.12s; /* @kind other */
+  --pb-dur: 0.15s; /* @kind other */
+}

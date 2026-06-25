@@ -1,37 +1,52 @@
+/* Design-system tokens (source of truth) — the live site now consumes these.
+   Tokens live in design-system/tokens/. The local --* vars below alias the
+   tokens, so the whole stylesheet re-points from one place. */
+@import url("/design-system/tokens/colors.css");
+@import url("/design-system/tokens/typography.css");
+@import url("/design-system/tokens/spacing.css");
+@import url("/design-system/tokens/a11y.css");
+
 :root {
-    --bg: #F5F3EF;
-    --bg-muted: #EBE9E4;
+    /* Aliased to tokens — exact matches, visually identical */
+    --bg: var(--pb-page);
+    --bg-muted: var(--pb-surface-hover);
+    --surface: var(--pb-surface);
+    --text-primary: var(--pb-text);
+    --text-secondary: var(--pb-text-muted);
+    --accent-light: var(--pb-accent-soft);
+    --accent-dark: var(--pb-brand-deep);
+    --border-on-surface: var(--pb-border);
+    --radius: var(--pb-radius);
+
+    /* Brand / a11y fixes — now match the token spec */
+    --text-muted: var(--pb-text-faint);    /* was #8A8A94 — failed 4.5:1 on white */
+    --accent: var(--pb-blue);              /* was #5B4FE8 — wrong primary indigo */
+    --agent-green: var(--pb-green);        /* was #16A34A — brighter than AA token */
+    --agent-amber: var(--pb-amber);        /* was #D97706 */
+    --agent-red: var(--pb-red);            /* was #DC2626 */
+    --font-sans: var(--pb-font-sans);
+    --font-display: var(--pb-font-sans);   /* one heading font: DM Sans (was Plus Jakarta Sans) */
+    --font-mono: var(--pb-font-mono);
+
+    /* Spacing — aliased to the 4px token scale (exact) */
+    --gutter: var(--pb-space-6);
+    --space-xs: var(--pb-space-2);
+    --space-sm: var(--pb-space-3);
+    --space-md: var(--pb-space-4);
+    --space-lg: var(--pb-space-5);
+    --space-xl: var(--pb-space-6);
+    --space-2xl: var(--pb-space-7);
+    --space-intro: var(--pb-space-7);
+    --space-stack: var(--pb-space-5);
+
+    /* Off-spec, site-specific values with no token (left as literals) */
     --bg-warm: #EEEBE5;
     --bg-deep: #E8E5DE;
-    --surface: #FFFFFF;
-    --text-primary: #1A1A1F;
-    --text-secondary: #5C5C66;
-    --text-muted: #8A8A94;
-    --accent: #5B4FE8;
-    --accent-light: #EEEBFF;
-    --accent-dark: #4338CA;
-    --agent-green: #16A34A;
-    --agent-amber: #D97706;
-    --agent-red: #DC2626;
-    --border-on-surface: #E4E0D8;
-    --radius: 12px;
     --radius-lg: 20px;
     --nav-height: 64px;
-    --max-width: 1120px;
-    --gutter: 32px;
-    --space-xs: 8px;
-    --space-sm: 12px;
-    --space-md: 16px;
-    --space-lg: 24px;
-    --space-xl: 32px;
-    --space-2xl: 48px;
+    --max-width: 1120px;          /* intentional override of --pb-page-max (1024px) */
     --space-section: 80px;
     --space-section-compact: 56px;
-    --space-intro: 48px;
-    --space-stack: 24px;
-    --font-sans: 'DM Sans', -apple-system, sans-serif;
-    --font-display: 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -296,9 +311,9 @@ nav {
     border-radius: 50%;
 }
 
-.console-dot:nth-child(1) { background: #EF4444; opacity: 0.7; }
-.console-dot:nth-child(2) { background: #F59E0B; opacity: 0.7; }
-.console-dot:nth-child(3) { background: #22C55E; opacity: 0.7; }
+.console-dot:nth-child(1) { background: var(--pb-red); opacity: 0.7; }
+.console-dot:nth-child(2) { background: var(--pb-amber); opacity: 0.7; }
+.console-dot:nth-child(3) { background: var(--pb-green); opacity: 0.7; }
 
 .agent-console-body { padding: var(--space-lg); }
 
@@ -351,7 +366,7 @@ nav {
 
 .status-blocked {
     color: var(--agent-red);
-    background: rgba(239, 68, 68, 0.12);
+    background: var(--pb-red-bg);
 }
 
 /* Trust strip */
@@ -895,7 +910,7 @@ footer {
 
 .form-field input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-light);
+    box-shadow: var(--pb-shadow-focus);
 }
 
 .form-field input::placeholder {
@@ -1151,5 +1166,44 @@ footer {
         margin-left: var(--gutter);
         margin-right: var(--gutter);
         padding: var(--space-lg);
+    }
+
+    /* Demo gate: overlay form on video — taller box so nothing clips */
+    .demo-video-wrap:not(.is-unlocked) .demo-video-player {
+        min-height: 520px;
+        overflow: hidden;
+    }
+
+    .demo-video-wrap:not(.is-unlocked) .demo-video-embed {
+        position: absolute;
+        inset: 0;
+        aspect-ratio: unset;
+        width: 100%;
+        height: 100%;
+    }
+
+    .demo-video-wrap:not(.is-unlocked) .demo-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: var(--space-md);
+        background: rgba(245, 243, 239, 0.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .demo-unlock-form {
+        width: 100%;
+        max-width: 100%;
+        padding: var(--space-lg);
+        flex-shrink: 0;
+    }
+
+    .demo-unlock-form h2 {
+        font-size: 22px;
     }
 }

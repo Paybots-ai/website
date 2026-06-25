@@ -1,0 +1,34 @@
+/* Paybots typography tokens — the real brand.
+   DM Sans for everything — UI text AND headings (one heading font, no separate
+   display face). IBM Plex Mono for amounts, IDs, reason codes, terminals. */
+
+:root {
+  --pb-font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --pb-font-display: "DM Sans", system-ui, -apple-system, sans-serif;
+  --pb-font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Weights */
+  --pb-weight-regular: 400;
+  --pb-weight-medium: 500;   /* labels, buttons */
+  --pb-weight-semibold: 600; /* headings, emphasis */
+  --pb-weight-bold: 700;     /* display headlines, amounts */
+
+  /* Type scale (px) — UI-dense, base 14 */
+  --pb-text-display: 34px;   /* page hero numbers / rare */
+  --pb-text-h1: 24px;        /* page title */
+  --pb-text-h2: 19px;        /* section title */
+  --pb-text-h3: 16px;        /* card title */
+  --pb-text-body: 14px;      /* default body / table cell */
+  --pb-text-sm: 13px;        /* secondary, hints */
+  --pb-text-xs: 12px;        /* labels, captions */
+  --pb-text-eyebrow: 11px;   /* uppercase eyebrow / field label */
+
+  /* Line heights */
+  --pb-leading-tight: 1.2;
+  --pb-leading-snug: 1.35;
+  --pb-leading-normal: 1.5;
+
+  /* Letter spacing */
+  --pb-tracking-eyebrow: 0.06em;  /* uppercase labels */
+  --pb-tracking-normal: 0;
+}

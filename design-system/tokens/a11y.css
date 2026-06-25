@@ -1,0 +1,38 @@
+/* Paybots accessibility primitives — ship with every surface that links styles.css.
+   One clean focus ring (keyboard users only) + a global reduced-motion guard, so
+   minimalism never costs function. */
+
+:focus-visible {
+  outline: 2px solid var(--pb-focus-ring, #4F46E5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* Skip-to-content link — hidden until focused. */
+.pb-skip-link {
+  position: absolute;
+  left: 16px;
+  top: -56px;
+  z-index: 1000;
+  background: var(--pb-surface, #fff);
+  color: var(--pb-text, #1A1A1F);
+  border: 1px solid var(--pb-border, #E4E0D8);
+  border-radius: var(--pb-radius, 12px);
+  padding: 10px 16px;
+  font-family: var(--pb-font-sans, system-ui), sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.15s var(--pb-ease, ease);
+}
+.pb-skip-link:focus { top: 16px; }
+
+/* Reduced motion: collapse all animation/transition, system-wide. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

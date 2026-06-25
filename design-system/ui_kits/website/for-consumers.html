@@ -1,0 +1,128 @@
+<!-- @dsCard group="Website" viewport="1120x800" name="Marketing site — For consumers" subtitle="Audience page; warm-paper sections, how-it-works steps" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <title>Paybots | For consumers</title>
+    <meta name="description" content="Your agent. Your money. Your rules. Paybots makes sure AI spends on your behalf the way you actually want, and stands behind the purchases it approves.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+    <nav id="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">Pay<span>bots</span></a>
+            <a href="mailto:hello@paybots.io?subject=Paybots%20Inquiry" class="btn btn-primary btn-nav">Talk to us</a>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <div class="agent-pill">
+                <span class="agent-pill-dot"></span>
+                For consumers
+            </div>
+            <h1>Your agent. Your money. Your rules.</h1>
+            <p>AI shops, reserves, and buys on your behalf. Paybots makes sure it does it the way you actually want, and stands behind the purchases it approves.</p>
+            <div class="hero-ctas">
+                <a href="mailto:hello@paybots.io?subject=Paybots%20Consumer%20Waitlist" class="btn btn-primary">Get on the list</a>
+                <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--bg-default">
+        <div class="surface content-block">
+        <h2>What Paybots does for you</h2>
+        <div class="feature-list">
+            <div class="feature-list-item">
+                <h3>Checks every purchase against what you asked for</h3>
+                <p>You told the agent to book a flight under $400. Paybots checks the purchase against that intent, not just your card balance. If the charge doesn't match what you asked, it doesn't go through.</p>
+            </div>
+            <div class="feature-list-item">
+                <h3>Rules you set, agents respect</h3>
+                <p>Spend caps, categories you're okay with, categories you're not, approval thresholds for bigger purchases. Set them once. Your agent operates inside them.</p>
+            </div>
+            <div class="feature-list-item">
+                <h3>Backed by Paybots</h3>
+                <p>If the agent buys the wrong thing, picks the wrong merchant, or gets tricked by a prompt injection attack, that's not your problem. Purchases that clear Paybots are backed by Paybots.</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="section section--bg-warm" id="how-it-works">
+        <div class="surface content-block">
+        <h2>How it works</h2>
+        <div class="feature-list">
+            <div class="feature-list-item">
+                <h3>1. Confirm.</h3>
+                <p>At first, every purchase your agent wants to make pings you for a quick yes-or-no. Nothing happens without your tap.</p>
+            </div>
+            <div class="feature-list-item">
+                <h3>2. Set the rules.</h3>
+                <p>Once you've seen the agent get a few right, you set the boundaries: limits, merchants, categories. The agent works inside them.</p>
+            </div>
+            <div class="feature-list-item">
+                <h3>3. Let it run.</h3>
+                <p>Over time, as Paybots learns what you want, the boundaries loosen. Eventually the agent can act on intent alone, on purchases Paybots backs end to end.</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="section section--bg-deep">
+        <div class="surface content-block">
+        <h2>What you can do with an agent that can actually buy</h2>
+        <ul class="bullet-list">
+            <li>Order the diapers when stock runs low.</li>
+            <li>Book the flight that fits the calendar.</li>
+            <li>Pay back a friend without opening an app.</li>
+            <li>Refill the office supplies without thinking about it.</li>
+        </ul>
+        <p class="closing-line">The agent handles it. You stay in control.</p>
+        </div>
+    </section>
+
+    <section class="section section--bg-default">
+        <div class="cta-block surface">
+            <h2>Get on the list</h2>
+            <p>We're rolling out access through partner products first. If you want to be one of the first consumers to try Paybots, drop us a line.</p>
+            <a href="mailto:hello@paybots.io?subject=Paybots%20Consumer%20Waitlist" class="hero-cta">hello@paybots.io</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Paybots, Inc.</p>
+        <div class="footer-links">
+            <a href="mailto:hello@paybots.io">hello@paybots.io</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+        </div>
+    </footer>
+
+    <script src="nav.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

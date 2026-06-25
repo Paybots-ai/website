@@ -1,0 +1,4 @@
+/* Paybots typefaces — the real brand (paybots.io).
+   DM Sans for all UI text & headings; IBM Plex Mono for code, amounts, IDs &
+   terminals. One heading font — no separate display face. Loaded from Google Fonts. */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=IBM+Plex+Mono:wght@500;600&display=swap");
