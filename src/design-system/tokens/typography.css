@@ -1,0 +1,26 @@
+:root {
+  --pb-font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --pb-font-display: "DM Sans", system-ui, -apple-system, sans-serif;
+  --pb-font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --pb-weight-regular: 400;
+  --pb-weight-medium: 500;
+  --pb-weight-semibold: 600;
+  --pb-weight-bold: 700;
+
+  --pb-text-display: 34px;
+  --pb-text-h1: 24px;
+  --pb-text-h2: 19px;
+  --pb-text-h3: 16px;
+  --pb-text-body: 14px;
+  --pb-text-sm: 13px;
+  --pb-text-xs: 12px;
+  --pb-text-eyebrow: 11px;
+
+  --pb-leading-tight: 1.2;
+  --pb-leading-snug: 1.35;
+  --pb-leading-normal: 1.5;
+
+  --pb-tracking-eyebrow: 0.06em;
+  --pb-tracking-normal: 0;
+}

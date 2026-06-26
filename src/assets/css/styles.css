@@ -1,5 +1,4 @@
-/* Design-system tokens — served from ../paybots-design-system (symlinked at /design-system/).
-   The local --* vars below alias the tokens, so the whole stylesheet re-points from one place. */
+/* Token source: paybots-design-system (vendored under design-system/tokens/). */
 @import url("/design-system/tokens/colors.css");
 @import url("/design-system/tokens/typography.css");
 @import url("/design-system/tokens/spacing.css");
@@ -38,14 +37,25 @@
     --space-intro: var(--pb-space-7);
     --space-stack: var(--pb-space-5);
 
-    /* Off-spec, site-specific values with no token (left as literals) */
-    --bg-warm: #EEEBE5;
-    --bg-deep: #E8E5DE;
+    /* Site-specific values with no design-system token. */
+    --bg-warm: #EEEBE5;           /* warm content band */
+    --bg-deep: #E8E5DE;           /* deeper content band */
     --radius-lg: 20px;
     --nav-height: 64px;
     --max-width: 1120px;          /* intentional override of --pb-page-max (1024px) */
     --space-section: 80px;
-    --space-section-compact: 56px;
+
+    /* Surface treatment — reused across cards/panels. Site-tuned lighter than
+       --pb-shadow / --pb-elevate-float, so kept local. */
+    --surface-border: rgba(228, 224, 216, 0.7);
+    --shadow-surface: 0 2px 16px rgba(26, 26, 31, 0.04);
+    --shadow-float: 0 8px 28px rgba(26, 26, 31, 0.08);
+
+    /* Adoption terminal — intentionally dark regardless of page theme. */
+    --terminal-bg: #1A1A1F;
+    --terminal-fg: #F5F3EF;
+    --terminal-muted: #9CA3AF;
+    --terminal-success: #86EFAC;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -70,9 +80,9 @@ a { color: inherit; }
 .surface {
     background: var(--surface);
     color: var(--text-primary);
-    border: 1px solid rgba(228, 224, 216, 0.7);
+    border: 1px solid var(--surface-border);
     border-radius: var(--radius-lg);
-    box-shadow: 0 2px 16px rgba(26, 26, 31, 0.04);
+    box-shadow: var(--shadow-surface);
 }
 
 .surface h1,
@@ -369,31 +379,6 @@ nav {
     background: var(--accent-light);
 }
 
-.status-blocked {
-    color: var(--agent-red);
-    background: var(--pb-red-bg);
-}
-
-/* Trust strip */
-.trust-strip {
-    border-top: 1px solid var(--border-on-surface);
-    padding: var(--space-md) var(--gutter) var(--space-sm);
-}
-
-.trust-strip-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    text-align: center;
-}
-
-.trust-strip p {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-}
-
 /* Sections */
 .section {
     width: 100%;
@@ -410,7 +395,6 @@ nav {
 }
 
 .section > .feature-rows,
-.section > .features-grid,
 .section > .bento-grid,
 .section > .adoption-terminal,
 .section > .surface {
@@ -422,25 +406,9 @@ nav {
 .section--bg-default { --section-bg: var(--bg); }
 .section--bg-warm { --section-bg: var(--bg-warm); }
 .section--bg-deep { --section-bg: var(--bg-deep); }
-.section--bg-muted { --section-bg: var(--bg-muted); }
-
-.section--compact {
-    padding-block: var(--space-section-compact);
-}
 
 .section--tight-top {
     padding-top: var(--space-2xl);
-}
-
-.section--dark {
-    max-width: none;
-    padding-inline: var(--gutter);
-}
-
-.section--dark .section-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: var(--space-section) 0;
 }
 
 .section-intro {
@@ -596,36 +564,6 @@ nav {
     }
 }
 
-/* Card grid */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-stack);
-}
-
-.feature-card {
-    padding: var(--space-xl) var(--space-lg);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.feature-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(26, 26, 31, 0.08);
-}
-
-.feature-card h3 {
-    font-family: var(--font-display);
-    font-size: 17px;
-    font-weight: 700;
-    margin: 0 0 var(--space-sm);
-}
-
-.feature-card p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--text-secondary);
-}
-
 /* Bento grid */
 .bento-grid {
     display: grid;
@@ -644,7 +582,7 @@ nav {
 
 .bento-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(26, 26, 31, 0.08);
+    box-shadow: var(--shadow-float);
 }
 
 .bento-card h3 {
@@ -674,7 +612,7 @@ nav {
     position: relative;
     min-height: 300px;
     padding: var(--space-lg) var(--space-lg) var(--space-xl);
-    background: #1A1A1F;
+    background: var(--terminal-bg);
     font-family: var(--font-mono);
     font-size: 13px;
     line-height: 1.65;
@@ -692,15 +630,15 @@ nav {
 }
 
 .terminal-line--cmd {
-    color: #F5F3EF;
+    color: var(--terminal-fg);
 }
 
 .terminal-line--out {
-    color: #9CA3AF;
+    color: var(--terminal-muted);
 }
 
 .terminal-line--success {
-    color: #86EFAC;
+    color: var(--terminal-success);
 }
 
 .terminal-line--spacer {
@@ -850,9 +788,9 @@ footer {
     position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    border: 1px solid rgba(228, 224, 216, 0.7);
+    border: 1px solid var(--surface-border);
     background: var(--surface);
-    box-shadow: 0 2px 16px rgba(26, 26, 31, 0.04);
+    box-shadow: var(--shadow-surface);
     width: 100%;
 }
 
@@ -1198,7 +1136,6 @@ footer {
 
     .feature-row:nth-child(even) .feature-row-visual { order: 0; }
 
-    .features-grid,
     .bento-grid { grid-template-columns: 1fr; }
 
     .bento-card--wide { grid-column: auto; }
@@ -1208,7 +1145,6 @@ footer {
     :root {
         --gutter: 20px;
         --space-section: 56px;
-        --space-section-compact: 48px;
         --space-intro: 32px;
         --space-2xl: 32px;
     }

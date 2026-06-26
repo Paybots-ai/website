@@ -1,0 +1,9 @@
+<nav id="nav">
+    <div class="nav-inner">
+        <a href="/" class="logo">Pay<span>bots</span></a>
+        <div class="nav-actions">
+            <a href="/demo/" class="nav-link{% if navActive == 'demo' %} nav-link--active{% endif %}">Demo</a>
+            <a href="mailto:hello@paybots.io?subject={{ (navCtaSubject or 'Paybots Inquiry') | urlencode }}" class="btn btn-primary btn-nav">Talk to us</a>
+        </div>
+    </div>
+</nav>

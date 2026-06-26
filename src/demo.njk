@@ -1,30 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <title>Paybots | Demo</title>
-    <meta name="description" content="Watch the Paybots demo. See how agentic payments work with mandate alignment, user rules, and transaction guarantees.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-
-    <nav id="nav">
-        <div class="nav-inner">
-            <a href="/" class="logo">Pay<span>bots</span></a>
-            <div class="nav-actions">
-                <a href="/demo/" class="nav-link nav-link--active">Demo</a>
-                <a href="mailto:hello@paybots.io?subject=Paybots%20Inquiry" class="btn btn-primary btn-nav">Talk to us</a>
-            </div>
-        </div>
-    </nav>
-
+---
+layout: base.njk
+title: "Paybots | Demo"
+description: "Watch the Paybots demo. See how agentic payments work with mandate alignment, user rules, and transaction guarantees."
+navActive: demo
+pageScripts:
+  - /assets/js/demo.js
+---
     <section class="page-hero">
         <div class="page-hero-inner">
             <div class="agent-pill">
@@ -62,7 +43,6 @@
                                 <input type="email" id="demo-email" name="email" autocomplete="email" inputmode="email" autocapitalize="none" enterkeyhint="go" spellcheck="false" required placeholder="you@company.com">
                             </div>
                             <p class="form-error" id="demo-error" hidden>Please enter a valid name and email.</p>
-                            <p class="form-error" id="demo-submit-error" hidden>Something went wrong. Please try again.</p>
                             <button type="submit" class="btn btn-primary" id="demo-submit">Watch demo</button>
                         </form>
                     </div>
@@ -70,22 +50,3 @@
             </div>
         </div>
     </section>
-
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-bottom">
-                <p>&copy; 2026 Paybots, Inc.</p>
-                <div class="footer-links">
-                    <a href="mailto:hello@paybots.io">hello@paybots.io</a>
-                    <a href="/privacy/">Privacy</a>
-                    <a href="/terms/">Terms</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="/nav.js"></script>
-    <script src="/demo/demo.js"></script>
-
-</body>
-</html>

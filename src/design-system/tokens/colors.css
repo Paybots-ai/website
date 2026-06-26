@@ -1,0 +1,55 @@
+/* Brand + underwriting decision colors. Use --pb-text and --pb-decision-* in apps. */
+
+:root {
+  --pb-brand-deep: #4338CA;
+  --pb-blue: #4F46E5;
+  --pb-blue-hover: #4338CA;
+  --pb-blue-pressed: #3A2FB0;
+  --pb-blue-link: #4338CA;
+  --pb-blue-soft: #EEEBFF;
+
+  --pb-ink: #1A1A1F;
+  --pb-ink-2: #5C5C66;
+  --pb-ink-faint: #6E6E78;
+
+  --pb-page: #F5F3EF;
+  --pb-surface: #ffffff;
+  --pb-surface-muted: #F0EEE9;
+  --pb-surface-hover: #EBE9E4;
+  --pb-border: #E4E0D8;
+  --pb-border-strong: #D7D2C8;
+
+  --pb-green: #15803D;
+  --pb-green-bg: #E7F5EC;
+  --pb-green-border: #B7E4C7;
+
+  --pb-amber: #B45309; /* pending only — not a third decision */
+  --pb-amber-bg: #FBF1E1;
+  --pb-amber-border: #F5D9A8;
+
+  --pb-red: #B91C1C;
+  --pb-red-bg: #FBEAEA;
+  --pb-red-border: #F3C2C2;
+
+  --pb-text: var(--pb-ink);
+  --pb-text-muted: var(--pb-ink-2);
+  --pb-text-faint: var(--pb-ink-faint);
+
+  --pb-bg: var(--pb-page);
+  --pb-surface-card: var(--pb-surface);
+  --pb-surface-inset: var(--pb-surface-muted);
+
+  --pb-primary: var(--pb-blue);
+  --pb-primary-hover: var(--pb-blue-hover);
+  --pb-primary-pressed: var(--pb-blue-pressed);
+  --pb-link: var(--pb-blue-link);
+  --pb-accent-soft: var(--pb-blue-soft);
+
+  --pb-decision-approve: var(--pb-green);
+  --pb-decision-approve-bg: var(--pb-green-bg);
+  --pb-decision-reject: var(--pb-red);
+  --pb-decision-reject-bg: var(--pb-red-bg);
+  --pb-status-working: var(--pb-amber);
+
+  --pb-focus-ring: var(--pb-blue);
+}
