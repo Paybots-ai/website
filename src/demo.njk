@@ -1,0 +1,52 @@
+---
+layout: base.njk
+title: "Paybots | Demo"
+description: "Watch the Paybots demo. See how agentic payments work with mandate alignment, user rules, and transaction guarantees."
+navActive: demo
+pageScripts:
+  - /assets/js/demo.js
+---
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <div class="agent-pill">
+                <span class="agent-pill-dot"></span>
+                Product demo
+            </div>
+            <h1>See Paybots in action</h1>
+            <p>Watch how mandate alignment, user rules, and transaction guarantees work together when an AI agent makes a purchase.</p>
+        </div>
+    </section>
+
+    <section class="section section--bg-default section--tight-top">
+        <div class="demo-video-wrap" id="demo-gate">
+            <div class="demo-video-player">
+                <div class="demo-video-embed">
+                    <div class="demo-video-thumb" aria-hidden="true"></div>
+                    <iframe
+                        id="demo-iframe"
+                        title="Paybots product demo"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                <div class="demo-overlay" id="demo-locked">
+                    <div class="demo-unlock-form surface">
+                        <h2>Unlock the demo</h2>
+                        <p>Enter your name and email to watch the full walkthrough.</p>
+                        <form id="demo-form" method="post" autocomplete="on" novalidate>
+                            <div class="form-field">
+                                <label for="demo-name">Name</label>
+                                <input type="text" id="demo-name" name="full_name" autocomplete="name" autocapitalize="words" enterkeyhint="next" required placeholder="Your name">
+                            </div>
+                            <div class="form-field">
+                                <label for="demo-email">Email</label>
+                                <input type="email" id="demo-email" name="email" autocomplete="email" inputmode="email" autocapitalize="none" enterkeyhint="go" spellcheck="false" required placeholder="you@company.com">
+                            </div>
+                            <p class="form-error" id="demo-error" hidden>Please enter a valid name and email.</p>
+                            <button type="submit" class="btn btn-primary" id="demo-submit">Watch demo</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
