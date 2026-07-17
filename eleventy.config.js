@@ -2,6 +2,8 @@ module.exports = function (eleventyConfig) {
     // Static assets are copied through untouched, preserving their public URLs.
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy("src/design-system");
+    eleventyConfig.addPassthroughCopy("src/versions");
+    eleventyConfig.addPassthroughCopy("src/.well-known");
     eleventyConfig.addPassthroughCopy({
         "src/CNAME": "CNAME",
         "src/favicon.png": "favicon.png",
