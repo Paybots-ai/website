@@ -1,0 +1,41 @@
+---
+layout: base.njk
+title: "Verify a Paybots seal | Paybots"
+description: "Inspect and offline-verify Paybots underwriting seals on your device. No third-party JWT tools."
+navActive: verify
+pageScripts:
+  - /assets/js/verify.js
+---
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <div class="agent-pill">
+                <span class="agent-pill-dot"></span>
+                Offline verification
+            </div>
+            <h1>Verify a seal</h1>
+            <p>Paste a purchase record or underwriting seal. Parsing and cryptographic checks run entirely in your browser — cart data never leaves paybots.io.</p>
+        </div>
+    </section>
+
+    <section class="section section--bg-default section--tight-top">
+        <div class="verify-wrap surface">
+            <form id="verify-form" class="verify-form">
+                <div class="form-field">
+                    <label for="verify-input">Purchase JSON or seal object</label>
+                    <textarea id="verify-input" rows="12" spellcheck="false" placeholder='Paste a UCP checkout with signals["io.paybots.underwriting"], or the seal object { "underwriter", "version", "purchase_hash", ... }'></textarea>
+                </div>
+                <div class="form-field">
+                    <label for="verify-jwks">Signing keys (JWKS JSON)</label>
+                    <textarea id="verify-jwks" rows="6" spellcheck="false" placeholder='Paste JWKS from GET /.well-known/jwks.json, or leave empty to inspect members only'></textarea>
+                    <p class="form-hint"><button type="button" class="text-link" id="verify-load-jwks">Load paybots.io JWKS</button> — same-origin fetch only.</p>
+                </div>
+                <label class="verify-check">
+                    <input type="checkbox" id="verify-window" checked>
+                    Enforce issued_at / expires_at window (uses this device clock)
+                </label>
+                <p class="form-error" id="verify-error" hidden></p>
+                <button type="submit" class="btn btn-primary">Verify locally</button>
+            </form>
+            <div id="verify-output" class="verify-output" aria-live="polite"></div>
+        </div>
+    </section>

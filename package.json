@@ -4,11 +4,17 @@
   "private": true,
   "description": "Marketing site for paybots.io",
   "scripts": {
+    "prebuild": "node scripts/copy-fonts.mjs && node scripts/bundle-verify.mjs",
     "build": "eleventy",
+    "preserve": "node scripts/copy-fonts.mjs && node scripts/bundle-verify.mjs",
     "serve": "eleventy --serve",
     "clean": "rm -rf _site"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "@fontsource/dm-sans": "^5.2.8",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "canonicalize": "^3.0.0",
+    "esbuild": "^0.28.1"
   }
 }
